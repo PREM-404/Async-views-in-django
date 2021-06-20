@@ -24,7 +24,9 @@ async def home(request):
         return redirect('home')
 
     elif request.method == 'GET':
-        context = {}
+        context = {
+            'article_list': await sync_to_async(list)(Article.objects.all())
+        }
         return render(request, 'home.html', context)
 
 
